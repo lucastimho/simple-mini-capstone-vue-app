@@ -38,6 +38,7 @@
         <p>Tax: $ {{ currentProduct.tax }}</p>
         <p>Total: $ {{ currentProduct.total }}</p>
         <button v-on:click="updateProduct(currentProduct)">Update Product</button>
+        <button v-on:click="destroyProduct(currentProduct)">Delete</button>
         <button>close</button>
       </form>
     </dialog>
@@ -88,6 +89,13 @@ export default {
     updateProduct: function (product) {
       axios.patch("http://localhost:3000/products/" + product.id, product).then((response) => {
         console.log("Success", response.data);
+      });
+    },
+    destroyProduct: function (product) {
+      axios.delete("http://localhost:3000/products/" + product.id).then((response) => {
+        console.log("Success!", response.data);
+        var index = this.products.indexOf(product);
+        this.products.splice(index, 1);
       });
     },
   },

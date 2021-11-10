@@ -1,20 +1,32 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    Name
+    Name:
     <input type="text" v-model="newProductParams.name" />
-    Description
+    Description:
     <input type="text" v-model="newProductParams.description" />
-    Image
+    Image:
     <input type="text" v-model="newProductParams.image_url" />
-    Price
-    <input type="text" v-model="newProductParams.price" />
+    Price:
+    <input type="integer" v-model="newProductParams.price" />
     <button v-on:click="createProduct()">Create Product</button>
     <div v-for="product in products" :key="product.id">
       <h3>{{ product.name }}</h3>
-      <p>Price: ${{ product.price }}</p>
       <img v-bind:src="product.image_url" :alt="product.name" />
+      <p>Price: ${{ product.price }}</p>
+      <button v-on:click="showProduct(product)">More Info</button>
     </div>
+    <dialog id="product-details">
+      <form method="dialog">
+        <h1>Product Info:</h1>
+        <p>Name:...</p>
+        <p>Description:...</p>
+        <p>Price:...</p>
+        <p>Tax:...</p>
+        <p>Total:...</p>
+        <button>close</button>
+      </form>
+    </dialog>
   </div>
 </template>
 
@@ -31,6 +43,7 @@ export default {
     return {
       message: "Welcome to Lucas's Product Page!",
       products: [],
+      newProductParams: {},
     };
   },
   created: function () {
@@ -51,6 +64,10 @@ export default {
           this.products.push(response.data);
         })
         .catch((error) => console.log(error.response));
+    },
+    showProduct: function (product) {
+      console.log(product);
+      document.querySelector("#product-details").showModal();
     },
   },
 };

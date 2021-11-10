@@ -19,11 +19,11 @@
     <dialog id="product-details">
       <form method="dialog">
         <h1>Product Info:</h1>
-        <p>Name:...</p>
-        <p>Description:...</p>
-        <p>Price:...</p>
-        <p>Tax:...</p>
-        <p>Total:...</p>
+        <p>Name: {{ currentProduct.name }}</p>
+        <p>Description: {{ currentProduct.description }}</p>
+        <p>Price: ${{ currentProduct.price }}</p>
+        <p>Tax: ${{ currentProduct.tax }}</p>
+        <p>Total: ${{ currentProduct.total }}</p>
         <button>close</button>
       </form>
     </dialog>
@@ -44,6 +44,7 @@ export default {
       message: "Welcome to Lucas's Product Page!",
       products: [],
       newProductParams: {},
+      currentProduct: {},
     };
   },
   created: function () {
@@ -67,6 +68,7 @@ export default {
     },
     showProduct: function (product) {
       console.log(product);
+      this.currentProduct = product;
       document.querySelector("#product-details").showModal();
     },
   },

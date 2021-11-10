@@ -28,6 +28,10 @@
           <input type="text" v-model="currentProduct.description" />
         </p>
         <p>
+          Image:
+          <input type="text" v-model="currentProduct.image_url" />
+        </p>
+        <p>
           Price:
           <input type="text" v-model="currentProduct.price" />
         </p>
